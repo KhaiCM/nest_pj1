@@ -1,6 +1,7 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
 export class createUsersTable1599924988342 implements MigrationInterface {
+
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
@@ -14,7 +15,7 @@ export class createUsersTable1599924988342 implements MigrationInterface {
             generationStrategy: 'increment',
           },
           {
-            name: 'name',
+            name: 'email',
             type: 'varchar',
             isUnique: true
           },

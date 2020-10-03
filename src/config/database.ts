@@ -1,10 +1,10 @@
-export default () => ({
-    database_connection: process.env.DATABASE_CONNECTION || 'mysql',
-    database_host: process.env.DATABASE_HOST,
-    database_port: parseInt(process.env.DATABASE_PORT, 10) || 3306,
-    database_username: process.env.DATABASE_USERNAME,
-    database_password: process.env.DATABASE_PASSWORD,
-    database: process.env.DATABASE_DB_NAME,
+export default (): Record<string, any> => ({
+  databaseConnection: process.env.DATABASE_CONNECTION || 'mysql',
+  databaseHost: process.env.DATABASE_HOST,
+  databasePort: parseInt(process.env.DATABASE_PORT, 10) || 3306,
+  databaseUsername: process.env.DATABASE_USERNAME,
+  databasePassword: process.env.DATABASE_PASSWORD,
+  databaseName: process.env.DATABASE_DB_NAME,
     // entities: [__dirname + '/../**/*.entity.ts'],
-    synchronize: true,
+    // synchronize: true,
   })
