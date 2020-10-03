@@ -1,48 +1,52 @@
+import { Task } from '../tasks/task.entity';
+import * as bcrypt from 'bcryptjs';
 import {
   BaseEntity,
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   Unique,
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity({ name: 'users' })
+@Entity()
+@Unique(['username'])
 export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Unique(['email'])
   @Column()
-  email: string;
-
-  @Column()
-  firstName: string;
-
-  @Column()
-  lastName: string;
+  username: string;
 
   @Column()
   password: string;
 
   @Column()
-  isActive: boolean;
+  salt: string;
 
   @CreateDateColumn({
     default: 'now()',
     nullable: true,
   })
-  createAt: string;
+  created_at: string;
 
   @UpdateDateColumn({
     default: 'now()',
     nullable: true,
   })
-  updatedAt: string;
+  updated_at: string;
 
-  constructor(partial: Partial<User>) {
-    super();
-    Object.assign(this, partial);
+  @OneToMany(
+    type => Task,
+    task => task.user,
+    { eager: true },
+  )
+  tasks: Task[];
+
+  async validatePassword(password: string): Promise<boolean> {
+    const hash = await bcrypt.hash(password, this.salt);
+    return hash === this.password;
   }
 }
