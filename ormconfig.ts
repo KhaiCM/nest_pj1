@@ -5,9 +5,7 @@ export = {
   username: process.env.DATABASE_USERNAME,
   password: process.env.DATABASE_PASSWORD,
   database: process.env.DATABASE_DB_NAME,
-  migrations: [
-    'src/database/migrations/*.ts',
-  ],
+  migrations: ['src/database/migrations/*.ts'],
   cli: {
     migrationsDir: 'src/database/migrations',
   },
